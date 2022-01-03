@@ -10,12 +10,12 @@ const typeDefs = gql`
     hello: String
     getPosts: [Post]
   }
-  input createPostInput {
+  input createPostInputType {
     title: String
     description: String
   }
   type Mutation {
-    createPost(inputData: createPostInput): Post
+    createPost(inputData: createPostInputType): Post
   }
 `;
 

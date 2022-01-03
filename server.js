@@ -1,6 +1,8 @@
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
-const { ApolloServerPluginLandingPageGraphQLPlayground } = require("apollo-server-core");
+const {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+} = require("apollo-server-core");
 const typeDefs = require("./typeDefs.js");
 const resolvers = require("./resolvers.js");
 const mongoose = require("mongoose");
@@ -10,9 +12,7 @@ const startServer = async () => {
   const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
-    plugins: [
-      ApolloServerPluginLandingPageGraphQLPlayground(),
-    ],
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });
   await apolloServer.start();
   apolloServer.applyMiddleware({ app: app });
@@ -25,8 +25,10 @@ const startServer = async () => {
   });
 
   console.log("mongodb connected...");
-
-  app.listen(5000, () => console.log("Server start on port 5000"));
+  const port = 4000;
+  app.listen(port, () =>
+    console.log(`Server started\nhttp://localhost:${port}/graphql`)
+  );
 };
 
 startServer();

@@ -1,22 +1,12 @@
-const  Post  = require("./model/Post.model");
+const postMutation = require("./api/post/post.mutation");
+const postQuery = require("./api/post/post.query");
+
 const resolvers = {
   Query: {
-    hello: () => {
-      return "Hello world";
-    },
-    getPosts: async () => {
-      const posts = await Post.find()
-      return posts
-    }
+    ...postQuery,
   },
   Mutation: {
-    createPost: async (parent, args, context, info) => {
-      const { inputData } = args;
-      const { title, description } = inputData;
-      const post = new Post({ title, description });
-      await post.save();
-      return post;
-    },
+    ...postMutation,
   },
 };
 
