@@ -1,5 +1,5 @@
-const postMutation = require("./api/post/post.mutation");
-const postQuery = require("./api/post/post.query");
+const postMutation = require("./post/post.mutation");
+const postQuery = require("./post/post.query");
 
 const resolvers = {
   Query: {

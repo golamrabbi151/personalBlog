@@ -6,9 +6,15 @@ const typeDefs = gql`
     title: String
     description: String
   }
+
+  input QueryPostDataType {
+    id: ID
+    title: String
+  }
+
   type Query {
     hello: String
-    getPosts: [Post]
+    getPosts(queryData: QueryPostDataType): [Post]
   }
   input createPostInputType {
     title: String

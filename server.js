@@ -3,8 +3,8 @@ const { ApolloServer } = require("apollo-server-express");
 const {
   ApolloServerPluginLandingPageGraphQLPlayground,
 } = require("apollo-server-core");
-const typeDefs = require("./typeDefs.js");
-const resolvers = require("./resolvers.js");
+const typeDefs = require("./api/typeDefs.js");
+const resolvers = require("./api/resolvers.js");
 const mongoose = require("mongoose");
 
 const startServer = async () => {
