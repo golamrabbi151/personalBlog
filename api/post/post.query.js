@@ -5,9 +5,9 @@ module.exports = {
   },
   getPosts: async (parente, args, context) => {
     const { queryData } = args
-    // const body = JSON.stringify(queryData)
-    // console.log('query data after parse: ', body);
-    const posts = await PostHelper.getPostsQuery(queryData)
+    const body = JSON.parse(JSON.stringify(queryData))
+    console.log('query data after parse: ', body);
+    const posts = await PostHelper.getPostsQuery(body)
     return posts;
   },
 };
