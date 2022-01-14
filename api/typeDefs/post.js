@@ -1,6 +1,6 @@
 const { gql } = require("apollo-server-express");
 
-const typeDefs = gql`
+module.exports = gql`
   type Post {
     id: ID
     title: String
@@ -8,13 +8,12 @@ const typeDefs = gql`
   }
 
   input QueryPostDataType {
-    id: ID
+    _id: ID
     title: String
   }
 
   type Query {
-    hello: String
-    getPosts(queryData: QueryPostDataType): [Post]
+    getPosts(queryData: QueryPostDataType): Post
   }
   input createPostInputType {
     title: String
@@ -24,5 +23,3 @@ const typeDefs = gql`
     createPost(inputData: createPostInputType): Post
   }
 `;
-
-module.exports = typeDefs;

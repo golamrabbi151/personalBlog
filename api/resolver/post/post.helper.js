@@ -7,11 +7,11 @@ const getPosts = async (query = {}) => {
 
 const getPostsQuery = async (req) => {
   try {
-    const { id, title } = req;
-    console.log('qequest data: ', req);
+    const { _id, title } = req;
+    console.log('request data: ', req);
     const query = {}
-    if(size(id)){
-      query.id = id
+    if(size(_id)){
+      query._id = _id
     }
     if (size(title)) {
       query.title = title

@@ -3,8 +3,8 @@ const { ApolloServer } = require("apollo-server-express");
 const {
   ApolloServerPluginLandingPageGraphQLPlayground,
 } = require("apollo-server-core");
-const typeDefs = require("./api/typeDefs.js");
-const resolvers = require("./api/resolvers.js");
+const typeDefs = require("./api/typeDefs");
+const resolvers = require("./api/resolver/index");
 const mongoose = require("mongoose");
 
 const startServer = async () => {
@@ -27,8 +27,8 @@ const startServer = async () => {
   console.log("mongodb connected...");
   const port = 4000;
   app.listen(port, () =>
-    console.log(`Server started\nhttp://localhost:${port}/graphql`)
+      console.log(`Server started\n http://localhost:${port}/graphql`)
   );
 };
 
-startServer();
+ startServer();
