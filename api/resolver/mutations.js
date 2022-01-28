@@ -1,7 +1,7 @@
-const {userRegistration} = require("./user/user.mutation")
-const {createPost} = require("./post/post.mutation");
+const userMutations = require("./user/user.mutation")
+const postMutations = require("./post/post.mutation");
 
 module.exports = {
-    userRegistration,
-    createPost
+    ...postMutations,
+    ...userMutations
 }

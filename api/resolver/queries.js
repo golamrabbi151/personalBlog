@@ -1,6 +1,6 @@
-const {helloUser} = require("./user/user.query")
-const {getPosts} = require("./post/post.query");
+const userQuery = require("./user/user.query")
+const postQuery = require("./post/post.query");
 module.exports = {
-    helloUser,
-    getPosts
+    ...userQuery,
+    ...postQuery
 }

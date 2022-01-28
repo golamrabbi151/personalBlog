@@ -13,6 +13,12 @@ const startServer = async () => {
     typeDefs,
     resolvers,
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+    formatError: (err) => {
+      return ({
+        message: err.originalError.message || err.message,
+        code: err.originalError.code || 400
+      })
+    }
   });
   await apolloServer.start();
   apolloServer.applyMiddleware({ app: app });

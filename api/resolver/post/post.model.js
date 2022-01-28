@@ -8,7 +8,11 @@ const PostSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-});
+},
+    {
+      timestamps: true
+    }
+);
 
 const Post = mongoose.model("post", PostSchema);
 

@@ -2,6 +2,7 @@ const { size } = require('lodash')
 const Post = require("./post.model");
 const getPosts = async (query = {}) => {
   const posts = await Post.find(query);
+  console.log('posts: ', posts)
   return posts;
 };
 
@@ -17,9 +18,7 @@ const getPostsQuery = async (req) => {
       query.title = title
     }
     const postData = await getPosts(query);
-    if (postData) {
-      return postData;
-    }
+    return postData
   } catch (error) {
     const errorMessage = error.message || "Internal server error";
     const statusCode = error.statusCode || 500;
