@@ -6,6 +6,7 @@ const {
 const typeDefs = require("./api/typeDefs");
 const resolvers = require("./api/resolver/index");
 const mongoose = require("mongoose");
+require("dotenv").config()
 
 const startServer = async () => {
   const app = express();
@@ -25,7 +26,10 @@ const startServer = async () => {
   app.use((req, res) => {
     res.send("Hello! From apollo express");
   });
-  await mongoose.connect("mongodb://localhost:27017/myblog", {
+
+  const dbUri = process.env.PRODUCTION_DB
+
+  await mongoose.connect(dbUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
