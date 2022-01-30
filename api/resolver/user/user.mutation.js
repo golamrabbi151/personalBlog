@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs")
 const User = require("./user.model");
 const appHelper = require("../appHelper/index")
 module.exports = {
@@ -5,7 +6,19 @@ module.exports = {
         const {inputData} = args;
         let data = JSON.stringify(inputData);
         data = JSON.parse(data)
-        const userData = new User(data);
+        const {
+            name,
+            email,
+            password,
+            gender
+        } = data
+        const encryptPassword = await bcrypt.hash(password, 10)
+        const userData = new User({
+            name,
+            email,
+            password: encryptPassword,
+            gender
+        });
         const result = await userData.save();
         return result;
     },
