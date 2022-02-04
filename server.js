@@ -1,23 +1,31 @@
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
+const mongoose = require("mongoose");
 const {
   ApolloServerPluginLandingPageGraphQLPlayground,
 } = require("apollo-server-core");
 const typeDefs = require("./api/typeDefs");
 const resolvers = require("./api/resolver/index");
-const mongoose = require("mongoose");
 require("dotenv").config()
-
+const authHelper = require("./api/resolver/Authorization/authorization")
 const startServer = async () => {
   const app = express();
   const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+    context:({req})=>{
+    const authToken =  req.headers || ''
+   const token =  authHelper.verifyAuth(authToken)
+      // if (!token) throw new Error('You must logged in')
+      return {token}
+    },
     formatError: (err) => {
+      console.log('error: ', err)
+        console.log('error mess: ', err.message)
       return ({
-        message: err.originalError.message || err.message,
-        code: err.originalError.code || 400
+        message: err.originalError?.message || err.message,
+        code: err.originalError?.code || 400
       })
     }
   });

@@ -25,15 +25,12 @@ module.exports = {
         if (!isValid){
             throw new Error("Invalid password")
         }
-        const token = jwt.sign({ userId: user._id }, "app_secret")
+        const token = jwt.sign({ userId: user._id , role:"admin"}, "app_secret")
 
         return {
             _id: user._id,
             name: user.name,
-            email: user.email,
-            gender: user.gender,
             token: token,
-            createdAt: user.createdAt,
-            updatedAt: user.updatedAt}
+        }
     }
 }
