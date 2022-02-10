@@ -16,21 +16,5 @@ module.exports = {
         }
        const user = await userHelper.getUserByQuery(body)
     return user
-    },
-    loginUser: async (parent, args) => {
-        const {queryData} = args
-        const { email, password } = queryData
-        const user = await User.findOne({email})
-        const isValid = await bcrypt.compare(password, user.password)
-        if (!isValid){
-            throw new Error("Invalid password")
-        }
-        const token = jwt.sign({ userId: user._id , role:"admin"}, "app_secret")
-
-        return {
-            _id: user._id,
-            name: user.name,
-            token: token,
-        }
     }
 }

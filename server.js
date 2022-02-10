@@ -15,14 +15,14 @@ const startServer = async () => {
     resolvers,
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
     context:({req})=>{
-    const authToken =  req.headers || ''
-   const token =  authHelper.verifyAuth(authToken)
-      // if (!token) throw new Error('You must logged in')
-      return {token}
+    const authToken =  req.headers.authentication || ''
+      if (authToken){
+        const token =  authHelper.verifyAuth(authToken)
+        if (!token) throw new Error('You must logged in')
+        return token
+      }
     },
     formatError: (err) => {
-      console.log('error: ', err)
-        console.log('error mess: ', err.message)
       return ({
         message: err.originalError?.message || err.message,
         code: err.originalError?.code || 400
@@ -35,7 +35,7 @@ const startServer = async () => {
     res.send("Hello! From apollo express");
   });
 
-  const dbUri = process.env.PRODUCTION_DB
+  const dbUri = process.env.PRODUCTION_DB || process.env.LOCAL_DB
 
   await mongoose.connect(dbUri, {
     useNewUrlParser: true,

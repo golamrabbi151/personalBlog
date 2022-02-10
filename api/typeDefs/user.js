@@ -32,7 +32,7 @@ module.exports = gql`
         _id: String
     }
     
-    input loginQueryType {
+    input loginInputType {
         email: String,
         password: String
     }
@@ -49,10 +49,10 @@ module.exports = gql`
     
    type Query {
         getUsers(queryData: QueryUserType, options: Options):[User]
-        loginUser(queryData: loginQueryType): UserLoginType
    } 
    type Mutation {
         userRegistration(inputData: InsertUserType):User
+        loginUser(inputData: loginInputType): UserLoginType
         deleteUser(inputData: deleteUserInputType):User
     }
 `;

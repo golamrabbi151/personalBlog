@@ -3,12 +3,12 @@ module.exports = {
     verifyAuth: (header) => {
         try{
             if (header){
-                const authToken = header.authentication
-                const token = authToken.split(" ")[1]
-                const decodedData = jwt.verify(token, "app_secret")
+                const token = header.split(" ")[1]
+                const decodedData = jwt.verify(token, process.env.AUTH_SECRET)
                 if (decodedData){
                     if (decodedData.role === "admin"){
-                        return {userId: decodedData.userId}
+                        const req = {userId: decodedData.userId}
+                        return {req}
                     }
                 }
             }
